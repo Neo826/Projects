@@ -1,0 +1,222 @@
+#include <iostream>
+using namespace std;
+
+Sets::Sets() {
+
+    for (int i = 0; i < s; i++) {
+
+        num[i] = -1;
+
+    }
+
+}
+
+int Sets::getSize() {
+
+    return s;
+
+}
+
+void Sets::addElement(int l) {
+
+    for (int i = 0; i < s; i++) {
+
+        if (num[i] == -1) {
+
+            num[i] = l;
+
+            break;
+
+        }
+
+    }
+
+}
+
+int Sets::getElement(int j) {
+
+    if (j < s) {
+
+        return (-1);
+
+    }
+
+    else {
+
+        int t;
+
+        t = num[j];
+
+        return t;
+
+    }
+
+}
+
+bool Sets::isSubset(const Sets& b) {
+
+    for (int i = 0, j = 0; i < b.s; i++) {
+
+        while (j < s && num[j] < b.num[i]) ++j;
+
+        if (j == s || num[j] > b.num[i])
+
+            return false;
+
+    }
+
+    return true;
+
+}
+
+bool Sets::isProper(const Sets& b) {
+
+    int ne = 0;
+
+    for (int i = 0, j = 0; i < b.s; i++) {
+
+        while (j < s && num[j] < b.num[i]) ++j;
+
+        if (j == s || num[j] > b.num[i])
+
+            return false;
+
+        ++ne;
+
+    }
+
+    return ne < s;
+
+}
+
+void Sets::printOrderedPairs(const Sets& b) {
+
+    cout << "A X B = {";
+
+    for (int i = 0; i < s; i++) {
+
+        for (int j = 0; j < b.s; j++) {
+
+            cout << '(' << num[i] << ", " << b.num[j] << "), ";
+
+        }
+
+    }
+
+    cout << "\b\b} ";
+
+}
+
+
+void Sets::printSet() {
+
+    cout << "{";
+
+    for (int i = 0; i < s; i++) {
+
+        cout << num[i] << ",";
+
+    }
+
+    cout << "}";
+
+}
+
+class Sets
+
+{
+
+private:
+
+    static const int s = 4;
+
+    int num[s];
+
+public:
+
+    Sets();
+
+    void addElement(int);
+
+    int getElement(int);
+
+    int getSize();
+
+    bool isSubset(const Sets&);
+
+    bool isProper(const Sets&);
+
+    void printSet();
+
+    void printOrderedPairs(const Sets&);
+
+};
+
+int main()
+
+{
+
+    Sets a;
+    Sets b;
+
+    a.addElement(1);
+
+    a.addElement(2);
+
+    a.addElement(3);
+
+    a.addElement(4);
+
+    b.addElement(3);
+
+    b.addElement(4);
+
+    b.addElement(5);
+
+    b.addElement(6);
+
+    cout << "Set A: ";
+
+    a.printSet();
+
+    cout << endl;
+
+    cout << "Set B: ";
+
+    b.printSet();
+
+    cout << "\n" << endl;
+
+    a.printOrderedPairs(b);
+
+    cout << "\n" << endl;
+
+    if (a.isSubset(b) == true) {
+
+        cout << "Set B is subset of set A" << endl;
+
+    }
+
+    else {
+
+        cout << "Set B is not a subset of set A" << endl;
+
+    }
+
+    if (a.isProper(b) == true) {
+
+        cout << "Set B is proper subset of set A" << endl;
+
+    }
+
+    else {
+
+        cout << "Set B is not a proper subset of set A" << endl;
+
+    }
+
+    system("PAUSE");
+
+    return 0;
+
+}
