@@ -1,0 +1,86 @@
+package casino;
+import java.util.Scanner;
+import java.util.Random;
+class calc {
+    Random randNums = new Random();
+    int rand, sumOfDice, snakeEye = 0, number = 0, cnt, tail = 0, head = 0, choice = 0;
+    Scanner sc = new Scanner(System.in);
+    int tossTheCoin() {
+        System.out.println("Enter the number (prime)");
+        number = sc.nextInt();
+        for (int i = 0; i < number; i++)
+        {
+            rand = randNums.nextInt() % 2;
+            if (rand == 0)
+                tail = tail + 1;
+            else if (rand == 1)
+                head = head + 1;
+        }
+        System.out.println("Heads was tossed " + head + " times");
+        return randNums.nextInt() % 2;
+    }
+    int rollDice() {
+        int num;
+        System.out.println("Enter the number (prime)");
+        num = sc.nextInt();
+        for (int i = 0; i < num; i++)
+        {
+            int rand1 = 1 + randNums.nextInt() % 6;
+            int rand2 = 1 + randNums.nextInt() % 6;
+            sumOfDice = rand1 + rand2;
+            if (sumOfDice == 2)
+                snakeEye = snakeEye + 1;
+        }
+        System.out.println("number of Snake Eyes " + snakeEye + " out of " + num + " throws");
+        return snakeEye;
+    }
+    int Fact(int num) {
+        int f = 1;
+        for (int i = 1; i <= num; i++)
+        {
+            f = f * i;
+        }
+        return f;
+    }
+    int PermutationAces() {
+        int ace;
+        ace = 1 + randNums.nextInt(7);
+        int x = Fact(7);
+        int y = Fact(7 - ace);
+        int permu = x / y;
+        System.out.println("Number of permutations is " + permu);
+        return permu;
+    }
+}
+public class Casino {
+    public static void main(String[] args) {
+        int choice = 1, num;
+        calc c = new calc();
+        Scanner sc = new Scanner(System.in);
+        while (choice != 0) {
+            System.out.println();
+            System.out.println("Micro Casino");
+            System.out.println("1) Flip a coin");
+            System.out.println("2) Roll dice for snake-eyes");
+            System.out.println("3) Permutation of number of aces");
+            System.out.println("0) Quit");
+            System.out.println("\nEnter your choice");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    c.tossTheCoin();
+                    break;
+                case 2:
+                    c.rollDice();
+                    break;
+                case 3:
+                    c.PermutationAces();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+            }
+        }
+    }
+}
