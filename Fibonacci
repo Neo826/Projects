@@ -1,0 +1,76 @@
+#include<iostream>
+#include"Fib.cpp"
+#include"Fib.h"
+
+using namespace std;
+
+int main()
+
+{
+	bool repeat = true;
+	int choice;
+	int a;
+	int fibResult;
+	int catResult;
+
+	do
+
+	{
+		cout << "1. Calc Catalan Numbers" << endl;
+
+		cout << "2. Calc Fibonacci Numbers" << endl;
+
+		cout << "0. Quit" << endl;
+
+		cout << "Enter selection: ";
+
+		cin >> choice;
+
+		switch (choice)
+
+		{
+
+		case 1:
+
+
+			cout << "\nEnter Catalan number: ";
+
+			cin >> a;
+
+			catResult = getCatalanNumber(a);
+
+			cout << "Catalan number at " << a << " is " << catResult;
+
+			break;
+
+		case 2:
+
+			cout << "\nEnter Fibonacci number: ";
+
+			cin >> a;
+
+			fibResult = fibonacci(a);
+
+			cout << "Fibonacci number " << a << " is " << fibResult;
+
+			break;
+
+		case 0:
+
+			repeat = false;
+
+			break;
+
+		default:
+
+			cout << "Invalid choice.";
+
+			break;
+
+		}
+
+		cout << endl << endl;
+
+	} while (repeat);
+
+}
